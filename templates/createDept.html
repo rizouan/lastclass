@@ -1,0 +1,26 @@
+{% extends 'empapp/base.html' %}
+
+{% block title %}Title Here{% endblock %}
+
+  {% block stylesheet %}
+
+  {% endblock %}
+
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+      <form  method="POST" class="post-form" enctype="multipart/form-data">
+        {% include "empapp/baseForm.html" %}
+       <button type="submit">Submit</button>
+      </form>
+  </body>
+</html>
+
+{% endblock %}

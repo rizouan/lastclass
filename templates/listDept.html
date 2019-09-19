@@ -1,0 +1,81 @@
+{% extends 'empapp/base.html' %}
+
+{% block title %}Title Here{% endblock %}
+
+  {% block stylesheet %}
+  {% endblock %}
+
+
+{% block content %}
+
+<table class="table table-striped table-bordered table-sm">
+    <thead class="thead-dark">
+    <tr>
+        <th>Department ID</th>
+        <th>Department Name</th>
+
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+{% for dept in departments %}
+    <tr>
+        <td>{{ dept.id }}</td>
+        <td>{{ dept.name }}</td>
+
+        <td>
+            <a href="/emp/editDept/{{ dept.id }}"><span class="glyphicon glyphicon-pencil" >Edit</span></a>
+            <a href="/emp/deleteDept/{{ dept.id }}">Delete</a>
+        </td>
+    </tr>
+{% endfor %}
+    </tbody>
+</table>
+<br>
+
+{% if departments.has_other_pages %}
+  <nav aria-label="Topics pagination" class="mb-4">
+    <ul class="pagination">
+      {% if departments.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ departments.previous_page_number }}">Previous</a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <span class="page-link">Previous</span>
+        </li>
+      {% endif %}
+
+      {% for page_num in departments.paginator.page_range %}
+        {% if departments.number == page_num %}
+          <li class="page-item active">
+            <span class="page-link">
+              {{ page_num }}
+              <span class="sr-only">(current)</span>
+            </span>
+          </li>
+        {% else %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+
+      {% if departments.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ departments.next_page_number }}">Next</a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <span class="page-link">Next</span>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+{% endif %}
+
+<br>
+<center><a href="/emp/createdept" class="btn btn-primary">Add New Record</a></center>
+
+
+{% endblock %}
